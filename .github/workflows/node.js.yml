@@ -39,6 +39,8 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
     needs:
       - build
     steps:
