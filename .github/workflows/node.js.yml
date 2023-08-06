@@ -10,17 +10,50 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  # build:
 
+  #   runs-on: ubuntu-latest
+
+  #   strategy:
+  #     matrix:
+  #       node-version: [18.x]
+  #       # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Use Node.js ${{ matrix.node-version }}
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
+  #         cache: 'npm'
+  #     - run: npm ci
+  #     - run: npm run build --if-present
+  #     # - run: npm test
+    
+  #     # - name: "build artifact"
+  #     #   uses: actions/upload-artifact@v3
+  #     #   with:
+  #     #     name: vmb
+  #     #     path: build
+  #     #     if-no-files-found: error
+
+  release:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
+    # needs:
+    #   - build
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v3
+      # - name: "download build artifact"
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: vmb
+      #     path: build
+
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -28,33 +61,10 @@ jobs:
           cache: 'npm'
       - run: npm ci
       - run: npm run build --if-present
-      # - run: npm test
-    
-      - name: "build artifact"
-        uses: actions/upload-artifact@v3
-        with:
-          name: vmb
-          path: .
-          if-no-files-found: error
-
-  release:
-    runs-on: ubuntu-latest
-    needs:
-      - build
-    permissions:
-      contents: write
-    steps:
-      - name: "download build artifact"
-        uses: actions/download-artifact@v3
-        with:
-          name: vmb
-          path: .
-
-      - name: Checkout
-        uses: actions/checkout@v3
+      - run: echo ${{ github.sha }} > Release.txt
         
-      - name: Build
-        run: echo ${{ github.sha }} > Release.txt
+      # - name: Build
+      #   run: echo ${{ github.sha }} > Release.txt
         
       - name: Test
         run: cat Release.txt
@@ -72,5 +82,5 @@ jobs:
           files: |
             Release.txt
             LICENSE
-            vmb
+            vmb.exe
 
