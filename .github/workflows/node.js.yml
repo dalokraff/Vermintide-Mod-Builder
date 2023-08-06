@@ -27,14 +27,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - run: npm ci
-      - run: npm run build --if-present
+      - run: npm run build
       # - run: npm test
     
       - name: "build artifact"
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: build
+          name: vmb
+          path: .
+          if-no-files-found: error
 
   release:
     runs-on: ubuntu-latest
@@ -44,10 +45,10 @@ jobs:
       - name: "download build artifact"
         uses: actions/download-artifact@v3
         with:
-          name: build
-          path: build
+          name: vmb
+          path: .
 
-      - name: "🚀 release"
+      - name: "release"
         id: semantic-release
         uses: open-sauced/semantic-release-conventional-config@v3
         env:
