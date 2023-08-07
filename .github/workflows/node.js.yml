@@ -2,7 +2,7 @@ name: VMB build
 
 on:
   push:
-    branches: [ "master","pipe-test" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -40,6 +40,4 @@ jobs:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           generate_release_notes: True
           files: |
-            Release.txt
-            LICENSE
             *.zip
