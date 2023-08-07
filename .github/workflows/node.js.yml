@@ -30,7 +30,7 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          echo: version=$(awk 'NR==3{ print $2; exit }' package.json)
+          echo: awk 'NR==3{ print $2; exit }' package.json
           echo "release_tag={version}" >> $GITHUB_OUTPUT 
          
       - name: Release
