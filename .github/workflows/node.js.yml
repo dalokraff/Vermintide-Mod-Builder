@@ -31,7 +31,7 @@ jobs:
         id: tag
         run: |
           VMB_VERSION=$(npm pkg get version)
-          echo "release_tag=$VMB_VERSION" >> $GITHUB_OUTPUT 
+          echo "release_tag=${VMB_VERSION//"}" >> $GITHUB_OUTPUT 
          
       - name: Release
         uses: softprops/action-gh-release@v1
