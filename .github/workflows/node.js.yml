@@ -78,8 +78,8 @@ jobs:
         run: |
           mkdir vmb-release
           mkdir vmb-release/mods/
-          cp /.template/* vmb-release
-          cp /.template-vmf/* vmb-release
+          cp .template/* vmb-release
+          cp .template-vmf/* vmb-release
           cp vmb.exe vmb-release
           
       - name: Release
