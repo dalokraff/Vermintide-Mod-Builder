@@ -81,6 +81,7 @@ jobs:
           cp -r .template/* vmb-release
           cp -r .template-vmf/* vmb-release
           cp vmb.exe vmb-release
+          zip -r vmb.zip vmb-release
           
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -90,5 +91,5 @@ jobs:
           files: |
             Release.txt
             LICENSE
-            vmb-release/
+            *.zip
 
