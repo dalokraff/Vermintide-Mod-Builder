@@ -35,6 +35,7 @@ jobs:
          
       - name: Release
         uses: softprops/action-gh-release@v1
+        if: ${{ github.event.pull_request.merged }}
         with:
           name: VMB v${{ steps.tag.outputs.release_tag }}
           tag_name: ${{ steps.tag.outputs.release_tag }}
