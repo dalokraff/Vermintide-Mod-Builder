@@ -33,7 +33,7 @@ jobs:
           VMB_SUFFIX=$(npm pkg get version)
           VMB_VERSION=""
           VMB_VERSION+=VMB_SUFFIX
-          echo "release_tag=VMB-v${VMB_VERSION}" >> $GITHUB_OUTPUT 
+          echo "release_tag=VMB-v${{VMB_VERSION}}" >> $GITHUB_OUTPUT 
          
       - name: Release
         uses: softprops/action-gh-release@v1
