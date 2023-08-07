@@ -74,15 +74,13 @@ jobs:
         run: |
           echo "::set-output name=release_tag::UserBuild_$(date +"%Y.%m.%d_%H-%M")"
 
-      # - name: Add Template Folders
-      #   run: |
-      #     git init
-      #     git remote add -f origin https://github.com/dalokraff/VMF-Build-Script
-      #     git config core.sparsecheckout true
-      #     echo .template-vmf/ >> .git/info/sparse-checkout
-      #     echo .template/ >> .git/info/sparse-checkout
-      #     echo mods/ >> .git/info/sparse-checkout
-      #     git pull origin master
+      - name: Create Release Zip
+        run: |
+          mkdir vmb-release
+          mkdir vmb-release/mods/
+          cp /.template/* vmb-release
+          cp /.template-vmf/* vmb-release
+          cp vmb.exe vmb-release
           
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -92,8 +90,5 @@ jobs:
           files: |
             Release.txt
             LICENSE
-            mods
-            .template/*
-            # .template-vmf/*
-            vmb.exe
+            vmb-release/
 
