@@ -92,8 +92,8 @@ jobs:
           files: |
             Release.txt
             LICENSE
-            /mods/.
-            /.template/.
-            /.template-vmf/.
+            mods/*
+            .template/*
+            .template-vmf/*
             vmb.exe
 
