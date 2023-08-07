@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build_n_release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -23,10 +23,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: echo ${{ github.sha }} > Release.txt
-                
-      - name: Test
-        run: cat Release.txt
-        
+                        
       - name: Generate release tag
         id: tag
         run: |
