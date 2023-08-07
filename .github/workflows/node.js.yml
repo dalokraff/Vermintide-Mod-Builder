@@ -30,9 +30,10 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          VMB_VERSION=$(npm pkg get version) | tr -d '"'
-          VMB_PREFIX="VMB v"
-          echo "release_tag=${VMB_PREFIX}${VMB_VERSION}" >> $GITHUB_OUTPUT 
+          VMB_SUFFIX=$(npm pkg get version) | tr -d '"'
+          VMB_VERSION="VMB v"
+          VMB_VERSION+=VMB_SUFFIX
+          echo "release_tag=${VMB_VERSION}" >> $GITHUB_OUTPUT 
          
       - name: Release
         uses: softprops/action-gh-release@v1
