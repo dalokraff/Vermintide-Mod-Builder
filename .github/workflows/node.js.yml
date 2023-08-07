@@ -30,7 +30,7 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          VMB_SUFFIX=$(npm pkg get version) | tr -d '"'
+          VMB_SUFFIX=$(npm pkg get version)
           VMB_VERSION="VMB v"
           VMB_VERSION+=VMB_SUFFIX
           echo "release_tag=${VMB_SUFFIX}" >> $GITHUB_OUTPUT 
