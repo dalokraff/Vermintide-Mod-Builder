@@ -4,8 +4,6 @@ on:
   push:
     branches: [ "master" ]
   pull_request:
-    types: 
-      - merged
     branches: [ "master" ]
 
 jobs:
@@ -32,7 +30,7 @@ jobs:
           echo "release_tag=${VMB_VERSION}" >> $GITHUB_OUTPUT 
          
       - name: Release
-#         if: github.event.pull_request.merged == true
+        if: github.event_name != "pull_request"
         uses: softprops/action-gh-release@v1
         with:
           name: VMB v${{ steps.tag.outputs.release_tag }}
