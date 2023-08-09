@@ -30,7 +30,7 @@ jobs:
           echo "release_tag=${VMB_VERSION}" >> $GITHUB_OUTPUT 
          
       - name: Release
-        if: github.event_name != "pull_request"
+        if: contains(fromJSON('["push"'), github.event_name)
         uses: softprops/action-gh-release@v1
         with:
           name: VMB v${{ steps.tag.outputs.release_tag }}
