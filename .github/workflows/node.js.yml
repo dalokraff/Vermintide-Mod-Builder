@@ -26,7 +26,7 @@ jobs:
       - name: Generate release tag
         id: tag
         run: |
-          VMB_VERSION=$(npm pkg get version | tr -d '"')
+          VMB_VERSION=npm pkg get version | tr -d '"'
           echo "release_tag=${VMB_VERSION}" >> $GITHUB_OUTPUT 
          
       - name: Release
